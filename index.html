@@ -5,16 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Trivia Game</title>
+  <!-- reset style -->
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <!-- custom styling -->
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
   
+<div class="title">
+  <h1>Trivia Game</h1>
+</div>
+<div id="QnABlock">
+  <div class="timerBlock">
+    <p id="timer">0:00</p>
+  </div>
+  <div class="questionBlock">
+    
+  </div>
+  <div class="answerBlock">
 
+  </div>
+  <div id="winBlock"></div>
+  <div id="loseBlock"></div>
+<button id="test">Next Question</button>
+</div>
   
   <!-- jQuery -->
   <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+  <script src="./assets/javascript/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+.QnABlock {
+  z-index: 1;
+}
+  .winBlock {
+    z-index: 2;
+    display: none;
+  }
+  .lossBlock {
+    z-index: 2;
+    display: none;
+  }
+
