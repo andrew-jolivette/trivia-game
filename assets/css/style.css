@@ -1,12 +1,54 @@
 .QnABlock {
   z-index: 1;
 }
-  .winBlock {
+.winBlock {
     z-index: 2;
     display: none;
   }
-  .lossBlock {
+.lossBlock {
     z-index: 2;
     display: none;
   }
 
+.title {
+  margin-top 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 80px;
+  text-align: center;
+}
+
+.timerBlock {
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-weight: 600;
+}
+
+#QnABlock {
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.choiceBlock {
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: auto;
+  padding-right: auto;
+  width: 400px;
+  background-color: black;
+  color: white;
+}
+  .choiceBlock:first-child {
+    margin-top: 10px;
+  }
+  .choiceBlock:hover {
+    color: yellow;
+  }
