@@ -6,7 +6,6 @@
 // var sessionID = Math.random().toString(36).substr(2, 9);
 // console.log(sessionID)
 
-// var ID
 var num = 0; 
 var triviaArr = [];
 var answerArr = [];
@@ -14,34 +13,30 @@ var answerID = 0;
 var correctAnswer;
 var wins = 0;
 var loss = 0;
-
-// function genID() {
-//   $.ajax({
-//     url: 'https://opentdb.com/api_token.php?command=request',
-//     method: "GET",
-//   }).then((response) => {
-//     console.log(`session token ID: ${response.token}`);
-//     return ID = response.token;
-//   });
-// } genID();
+var ID
+const url = `https://opentdb.com/api_token.php?command=request`
+var queryURL = `https://opentdb.com/api.php?amount=10&category=15&token=${ID}`
 
 
-// powered by: https://opentdb.com/
+$.ajax({
+  url: 'https://opentdb.com/api_token.php?command=request',
+  method: "GET",
+}).then((response) => {
+  console.log(`session token ID: ${response.token}`);
+  ID = response.token;
 
-function genTrivia() {
-  let queryURL = `https://opentdb.com/api.php?amount=10&category=15`;
-
+  const url = `https://opentdb.com/api.php?amount=10&category=15&token=${ID}`
   $.ajax({
-    url: queryURL,
-    method: "GET",
-    // success: askQuestion()
+    url,
+    method: "GET"
   }).then((response) => {
     for (let i=0; i < response.results.length; i++)
     triviaArr.push(response.results[i])
-  });
-}
+  })
+});
+// powered by: https://opentdb.com/
 
-  genTrivia();
+
   timeReset();
 
   triviaArr.length = 0; // makes triviaArr ready for new inputs
@@ -57,7 +52,7 @@ function genTrivia() {
         answerArr.push(triviaArr[num].incorrect_answers[j]);
       } console.log(answerArr)
       correctAnswer = answerArr[0];
-      if (answerArr[0] === "True") {
+      if (answerArr[0] === "True") { // logic test to ensure the True option is on top and the False option is on bottom
         $('.answerBlock').append(`<p class="choiceBlock" id="choice1" value="True" value="correct">${answerArr[0]}</p>`)
         $('.answerBlock').append(`<p class="choiceBlock" id="choice2" value="False" value="incorrect">${answerArr[1]}</p>`)
       } else if (answerArr[1] === "True") {
@@ -69,26 +64,27 @@ function genTrivia() {
           $('.answerBlock').append(`<p class="choiceBlock" id="choice${numChoice}" value="${answerArr[answerID]}">${answerArr[answerID]}</p>`)
           answerArr.splice(answerID, 1)
           numChoice++
-        } while (answerArr.length > 0)
-      }
+        } while (answerArr.length > 0);
+      };
     clickChoice();
     num++
   }
 
   $('#test').on('click', nextQuestion);
 
-function clickChoice() {  
+
+function clickChoice() {  // This needs to be re-worked using 'this'
   $('#choice1').on('click', () => {
     console.log($('#choice1').attr("value"))
     console.log(`Correct Answer: ${correctAnswer}`)
     if ($('#choice1').attr("value") === correctAnswer){
       console.log('Correct!')
       wins++;
-      // win transition
+      rightChoice();
     } else {
       console.log('Incorrect!')
       loss++;
-      // loss transition
+      wrongChoice();
     }
   }); 
   $('#choice2').on('click', () => {
@@ -97,9 +93,11 @@ function clickChoice() {
     if ($('#choice2').attr("value") === correctAnswer){
       console.log('Correct!')
       wins++;
+      rightChoice();
     } else {
       console.log('Incorrect!')
       loss++;
+      wrongChoice();
     }
   }); 
   $('#choice3').on('click', () => {
@@ -108,9 +106,11 @@ function clickChoice() {
     if ($('#choice3').attr("value") === correctAnswer){
       console.log('Correct!')
       wins++;
+      rightChoice();
     } else {
       console.log('Incorrect!')
       loss++;
+      wrongChoice();
     }
   }); 
   $('#choice4').on('click', () => {
@@ -119,12 +119,23 @@ function clickChoice() {
     if ($('#choice4').attr("value") === correctAnswer){
       console.log('Correct!')
       wins++;
+      rightChoice();
     } else {
       console.log('Incorrect!')
       loss++;
+      wrongChoice();
     }
   }); 
 }
+
+function rightChoice() {
+  timeReset();
+  showWin();
+};
+function wrongChoice() {
+  timeReset();
+  showLoss();
+};
 
 
 function nextQuestion() {
@@ -133,6 +144,7 @@ function nextQuestion() {
   $('.answerBlock').empty();
   if (num < 10){
     askQuestion();
+    $('#progress').html(`${num} / 10`)
   } else {
     num = 0;
   }
@@ -163,14 +175,115 @@ function count() {
   $('#timer').text(`${time}`);
   if (time === 0){
     timeStop();
+    showTimeUp();
+    loss++;
   }
 }
-$('#timerTest').on('click', timeStart);
-$('#timerTest2').on('click', timeStop);
-$('#timerTest3').on('click', timeReset);
+// $('#timerTest').on('click', timeStart);
+// $('#timerTest2').on('click', timeStop);
+// $('#timerTest3').on('click', timeReset);
 
+$('#startBlock').on('click', showGame)
 
+function testGameOver() {
+  if (num < 10) {
+    showGame();
+  } else {
+    gameOver();
+  }
+}
 
+function showStart() {
+  $('#startBlock').show()
+  $('#QnABlock').hide()
+  $('#winBlock').hide()
+  $('#lossBlock').hide()
+  $('#timeUpBlock').hide()
+  $('#gameOver').hide();
+}
+function showGame() {
+  $('#startBlock').hide()
+  $('#QnABlock').show()
+  $('#winBlock').hide()
+  $('#lossBlock').hide()
+  $('#timeUpBlock').hide()
+  $('#gameOver').hide();
+  nextQuestion();
+  timeStart();
+}
+function showWin() {
+  $('#startBlock').hide()
+  $('#QnABlock').hide()
+  $('#winBlock').show()
+  $('#lossBlock').hide()
+  $('#timeUpBlock').hide()
+  $('#gameOver').hide();
+  timeReset();
+  $('#winBlock').html(`Correct!`)
+  setTimeout(testGameOver, 2000);
+}
+function showLoss() {
+  $('#startBlock').hide()
+  $('#QnABlock').hide()
+  $('#winBlock').hide()
+  $('#lossBlock').show()
+  $('#timeUpBlock').hide()
+  $('#gameOver').hide();
+  timeReset();
+  $('#lossBlock').html(`Wrong!<br><br>Correct Answer:<br> ${correctAnswer}`)
+  setTimeout(testGameOver, 2000);
+}
+function showTimeUp() {
+  $('#startBlock').hide()
+  $('#QnABlock').hide()
+  $('#winBlock').hide()
+  $('#lossBlock').hide()
+  $('#timeUpBlock').show()
+  $('#gameOver').hide();
+  timeReset();
+  $('#timeUpBlock').html(`Wrong!<br><br>Correct Answer:<br> ${correctAnswer}`)
+  setTimeout(testGameOver, 2000);
+}
+function gameOver() {
+  $('#startBlock').hide()
+  $('#QnABlock').hide()
+  $('#winBlock').hide()
+  $('#lossBlock').hide()
+  $('#timeUpBlock').hide()
+  $('#gameOver').show();
+  // $('#playAgain').html(`Play Again?`)
+  if (wins > loss) {
+    $('#score').html(`You know your games! You got ${wins} out of 10 right!`)
+  } else if(loss > wins) {
+    $('#score').html(`I'm assigning you video game homework. You got ${loss} out of 10 wrong...`)
+  }
+  timeReset();
+  // $('#playAgain').on('click', resetGame);
+}
+
+// function resetGame(){ // reset functionality WIP
+//   num = 0; 
+//   triviaArr = [];
+//   answerArr = [];
+//   answerID = 0;
+//   wins = 0;
+//   loss = 0;
+  
+//   $.ajax({
+//     url: queryURL,
+//     method: "GET"
+//   }).then((response) => {
+//     for (let i=0; i < response.results.length; i++)
+//     triviaArr.push(response.results[i])
+//   })
+//   showStart();
+// }
+
+// $('#showStart').on('click', showStart);
+// $('#showGame').on('click', showGame);
+// $('#showWin').on('click', showWin);
+// $('#showLoss').on('click', showLoss);
+// $('#showTimeUp').on('click', showTimeUp);
 
 
 

@@ -15,7 +15,7 @@
 <div class="title">
   <p>Video Game Trivia!</p>
 </div>
-<div id="QnABlock">
+<div id="QnABlock" style="display: none;">
   <div class="timerBlock">
     <p><span id='timer'></span> seconds left.</p>
   </div>
@@ -23,15 +23,34 @@
     
   </div>
   <div class="answerBlock">
-
   </div>
-  <div id="winBlock"></div>
-  <div id="loseBlock"></div>
-<button id="test">Next Question</button>
+  <div id="progress"></div>
+
+  <!-- Debugging Tools -->
+<!-- <button id="test">Next Question</button>
 <button id="timerTest">Start Timer</button>
 <button id="timerTest2">Stop Timer</button>
-<button id="timerTest3">Reset Timer</button>
+<button id="timerTest3">Reset Timer</button> -->
+
 </div>
+
+<div id="startBlock" style="display: block;">
+  <p id="startButton">Start!</p>
+</div>
+<div id="winBlock" style="display: none;"></div>
+<div id="lossBlock" style="display: none;"></div>
+<div id="timeUpBlock" style="display: none;"></div>
+<div id="gameOver" style="display: none;">
+  <p id="score"></p>
+  <!-- <p id="playAgain"></p> -->
+</div>
+
+  <!-- Debugging Tools -->
+<!-- <button id="showStart">Show Start</button>
+<button id="showGame">Show Game</button>
+<button id="showWin">Show Win</button>
+<button id="showLoss">Show Loss</button>
+<button id="showTimeUp">Time Up</button> -->
   
   <!-- jQuery -->
   <script

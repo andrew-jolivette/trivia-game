@@ -34,6 +34,10 @@
   text-align: center;
 }
 
+#progress {
+  font-weight: 700;
+}
+
 .choiceBlock {
   margin-bottom: 10px;
   margin-left: auto;
@@ -51,4 +55,95 @@
   }
   .choiceBlock:hover {
     color: yellow;
+  }
+
+#startBlock {
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: darkred;
+  height: 200px;
+  width: 500px;
+  position: relative;
+  color: white;
+}
+#startBlock:hover {
+  color: yellow;
+  cursor: pointer;
+}
+#startButton {
+  font-size: 40px;
+  font-weight: 700;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
+#winBlock {
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightblue;
+  height: 200px;
+  width: 500px;
+  color: black;
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+}
+#lossBlock {
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightcoral; 
+  height: 300px;
+  width: 500px;
+  color: black;
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+}
+#timeUpBlock {
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightblue; 
+  height: 300px;
+  width: 500px;
+  color: white;
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+}
+#gameOver {
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: black; 
+  height: 300px;
+  width: 500px;
+  color: white;
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+}
+  #playAgain {
+    margin-top: 40px;
+    /* margin-bottom: 10px; */
+    margin-right: auto;
+    margin-left: auto;
+    width: 200px;
+    background: white;
+    color: black;
+  }
+    #playAgain:hover {
+      background: yellow;
+      cursor: pointer;
+    }
+
+  #score {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
